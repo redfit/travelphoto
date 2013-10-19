@@ -1,0 +1,10 @@
+# Read about factories at https://github.com/thoughtbot/factory_girl
+
+FactoryGirl.define do
+  factory :photo do
+    title "MyString"
+    comment "MyText"
+    user nil
+    album nil
+  end
+end
