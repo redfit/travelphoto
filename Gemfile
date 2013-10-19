@@ -15,23 +15,19 @@ gem 'mysql2'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'thin'
 group :development do
-  gem 'spring'
   gem 'foreman'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'guard-bundler'
+  gem 'guard', '>=2.1.0'
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'shoulda-matchers'
-  gem 'pry-rails', '~> 0.3.2'
   gem 'html2haml'
   gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  gem 'rb-fsevent'
   gem 'hirb'
   gem 'hirb-unicode'
   gem 'awesome_print'
@@ -39,6 +35,9 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails'
+  gem 'pry-rails', '~> 0.3.2'
+  gem 'spring'
+  gem 'growl'
 end
 
 group :test do

@@ -10,6 +10,8 @@ require 'rspec/autorun'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  config.include Devise::TestHelpers, :type => :controller
+  config.extend ControllerMacros, :type => :controller
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
   # ## Mock Framework
@@ -41,6 +43,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with(:truncation)
   end
   config.before(:each) do
     DatabaseCleaner.start
@@ -51,5 +54,12 @@ RSpec.configure do |config|
 
   config.before(:all) do
     FactoryGirl.reload
+  end
+
+  config.after(:suite) do
+    # Get rid of the linked images
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/system/test/[^.]*"])
+    end
   end
 end
