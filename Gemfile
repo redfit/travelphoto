@@ -8,17 +8,23 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'devise', '3.0'
 gem 'figaro'
 gem 'haml-rails'
 gem 'mysql2'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'thin'
 group :development do
+  gem 'spring'
+  gem 'foreman'
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
+  gem 'binding_of_caller'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'shoulda-matchers'
+  gem 'pry-rails', '~> 0.3.2'
   gem 'html2haml'
   gem 'hub', :require=>nil
   gem 'quiet_assets'
@@ -26,13 +32,22 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
+  gem 'hirb'
+  gem 'hirb-unicode'
+  gem 'awesome_print'
 end
-group :development, :test do
-  gem 'factory_girl_rails'
-  gem 'rspec-rails'
-end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
 end
+
+gem 'omniauth'
+gem 'rails_admin'
+gem 'paperclip'
+
+group :production do
+  gem 'aws-sdk'
+end
+
