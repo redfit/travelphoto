@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable, :confirmable
 
+  has_many :travels
   has_many :photos
   has_many :friends
   has_many :followings, through: :friends

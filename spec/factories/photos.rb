@@ -2,9 +2,10 @@
 
 FactoryGirl.define do
   factory :photo do
-    title "MyString"
-    comment "MyText"
-    user nil
-    album nil
+    sequence(:title){ |n| "photo#{n}" }
+    sequence(:comment){ |n| "comment#{n}" }
+    image { File.open(Rails.root.join("spec", "files", "favicon.png"))}
+    user
+    album
   end
 end

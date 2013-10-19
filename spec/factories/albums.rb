@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :album do
-    title "MyText"
-    travel nil
+    sequence(:title){ |n| "album#{n}" }
+    travel
   end
 end

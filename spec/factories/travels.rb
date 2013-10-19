@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :travel do
-    title "MyText"
-    startdate "2013-10-19"
-    enddate "2013-10-19"
-    user nil
+    sequence(:title){ |n| "travel#{n}" }
+    startdate Date.today - 3.days
+    enddate Date.today
+    user
   end
 end
