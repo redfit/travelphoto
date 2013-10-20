@@ -197,4 +197,52 @@ describe TravelController do
       expect(response).to redirect_to(travel_url)
     end
   end
+
+  def set_up_data
+    @travel = @current_user.travels.first
+    @album = FactoryGirl.create(:album, travel: @travel)
+    @photo = FactoryGirl.create(:photo, album: @album, user: @current_user)
+    @travel.cover_photo = @photo
+    @travel.save
+  end
+
+  describe "GET cover_photo" do
+    login_user
+
+    before(:each) do
+      set_up_data
+    end
+
+    it "should be return cover_photo" do
+      get :cover_photo, {id: @travel.id}
+      expect(assigns(:photo)).to eq @photo
+    end
+  end
+
+  describe "POST cover_photo" do
+    login_user
+
+    before(:each) do
+      set_up_data
+    end
+
+    it "access to cover_photo does not work without a signed in user" do
+      sign_out :user
+      post :cover_photo, {id: @travel.id, photo_id: @photo.id}
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it "access to edit, does not work when sign in as another user" do
+      sign_in :user, @different_user
+      post :cover_photo, {id: @travel.id, photo_id: @photo.id}
+      expect(response).to redirect_to(@travel)
+    end
+
+    it "should be set cover_photo" do
+      @travel.cover_photo = nil
+      @travel.save
+      post :cover_photo, {id: @travel.id, photo_id: @photo.id}
+      expect(Travel.find(@travel.id).cover_photo.id).to eq @photo.id
+    end
+  end
 end

@@ -6,5 +6,11 @@ FactoryGirl.define do
     startdate Date.today - 3.days
     enddate Date.today
     user
+
+    factory :travel_with_albums do
+      after(:create) do |travel, evaluator|
+        FactoryGirl.create(:album, travel: travel)
+      end
+    end
   end
 end

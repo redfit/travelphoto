@@ -1,6 +1,19 @@
 class TravelController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
 
+  def cover_photo
+    @travel = Travel.find(params[:id])
+    if params.has_key?(:photo_id)
+      return redirect_to new_user_session_path unless user_signed_in?
+      return redirect_to travel_path(params[:id]) if @travel.user_id != current_user[:id]
+      @travel.cover_photo = Photo.find(params[:photo_id])
+      @travel.save!
+    else
+      @photo = @travel.cover_photo
+    end
+    render nothing: true
+  end
+
   def index
     if params[:user_id]
       @travels = Travel.where(user_id: params[:user_id])

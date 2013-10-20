@@ -15,6 +15,7 @@ gem 'mysql2'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'thin'
 group :development do
+  gem 'erb2haml'
   gem 'foreman'
   gem 'better_errors'
   gem 'binding_of_caller'

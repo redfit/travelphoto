@@ -6,9 +6,12 @@ FactoryGirl.define do
     confirmed_at Date.today
     confirmation_token nil
 
-    factory :user_with_travel do
+    factory :user_with_travel_and_photo do
       after(:create) do |user, evaluator|
         FactoryGirl.create(:travel, user: user)
+      end
+      after(:create) do |user, evaluator|
+        FactoryGirl.create(:photo, user: user)
       end
     end
 
