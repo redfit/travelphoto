@@ -3,7 +3,7 @@ module ControllerMacros
   def login_user
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      @current_user = FactoryGirl.create(:user)
+      @current_user = FactoryGirl.create(:user_with_travel)
       sign_in @current_user
     end
   end
